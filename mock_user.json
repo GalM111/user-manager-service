@@ -1,0 +1,15 @@
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "assets": [
+        "Bitcoin",
+        "Ethereum",
+        "Tesla Stock"
+    ],
+    "investorType": null,
+    "contentType": [
+        "News",
+        "Analysis",
+        "Tutorial"
+    ]
+}
