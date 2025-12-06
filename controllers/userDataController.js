@@ -83,7 +83,7 @@ exports.deleteUserData = async (req, res) => {
 exports.getAllUserData = async (req, res) => {
     try {
         const userData = await UserData.find();
-        res.status(200).json({ message: 'All UserData retrieved', data: userData });
+        res.status(200).json(userData);
     } catch (err) {
         res.status(500).json({ message: 'Error retrieving UserData', error: err.message });
     }
@@ -107,15 +107,21 @@ exports.getUserDataById = async (req, res) => {
 
 // Get UserData by Email
 exports.getUserDataByEmail = async (req, res) => {
+    console.log("getUserDataByEmail");
+
     try {
-        const { email } = req.params;
+        const { email } = req.query;
+        if (!email) {
+            return res.status(400).json({ message: 'Email query parameter is required' });
+        }
+
         const userData = await UserData.findOne({ email });
 
         if (!userData) {
             return res.status(404).json({ message: 'UserData not found for this email' });
         }
 
-        res.status(200).json({ message: 'UserData retrieved', data: userData });
+        res.status(200).json(userData);
     } catch (err) {
         res.status(500).json({ message: 'Error retrieving UserData by email', error: err.message });
     }
