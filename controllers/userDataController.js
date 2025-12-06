@@ -26,7 +26,7 @@ exports.createUserData = async (req, res) => {
         });
 
         await userData.save();
-        res.status(201).json({ message: 'UserData created successfully', data: userData });
+        res.status(201).json(userData);
     } catch (err) {
         res.status(500).json({ message: 'Error creating UserData', error: err.message });
     }
@@ -55,7 +55,7 @@ exports.updateUserData = async (req, res) => {
             return res.status(404).json({ message: 'UserData not found' });
         }
 
-        res.status(200).json({ message: 'UserData updated successfully', data: userData });
+        res.status(200).json(userData);
     } catch (err) {
         res.status(500).json({ message: 'Error updating UserData', error: err.message });
     }
