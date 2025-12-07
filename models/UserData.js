@@ -27,6 +27,16 @@ const UserDataSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    likedContent: {
+        type: [],
+        default: [],
+        required: false,
+    },
+    dislikedContent: {
+        type: [],
+        default: [],
+        required: false,
+    }
 });
 
 module.exports = mongoose.model('UserData', UserDataSchema);

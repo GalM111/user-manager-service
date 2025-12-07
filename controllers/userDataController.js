@@ -36,18 +36,46 @@ exports.createUserData = async (req, res) => {
 exports.updateUserData = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, email, assets, investorType, contentType } = req.body;
+        const { name, email, assets, investorType, contentType, likedContent, dislikedContent } = req.body;
+
+        const setFields = {};
+        if (name !== undefined) setFields.name = name;
+        if (email !== undefined) setFields.email = email;
+        if (assets !== undefined) setFields.assets = assets;
+        if (investorType !== undefined) setFields.investorType = investorType;
+        if (contentType !== undefined) setFields.contentType = contentType;
+
+        const updateOperations = {};
+        if (Object.keys(setFields).length) {
+            updateOperations.$set = setFields;
+        }
+
+        const addToSetOps = {};
+        if (likedContent !== undefined) {
+            const likedItems = Array.isArray(likedContent) ? likedContent : [likedContent];
+            if (likedItems.length) {
+                addToSetOps.likedContent = { $each: likedItems };
+            }
+        }
+        if (dislikedContent !== undefined) {
+            const dislikedItems = Array.isArray(dislikedContent) ? dislikedContent : [dislikedContent];
+            if (dislikedItems.length) {
+                addToSetOps.dislikedContent = { $each: dislikedItems };
+            }
+        }
+        if (Object.keys(addToSetOps).length) {
+            // Add new likes/dislikes without overwriting the arrays
+            updateOperations.$addToSet = addToSetOps;
+        }
+
+        if (!Object.keys(updateOperations).length) {
+            return res.status(400).json({ message: 'No valid fields supplied for update' });
+        }
 
         // Find and update UserData
         const userData = await UserData.findByIdAndUpdate(
             id,
-            {
-                name,
-                email,
-                assets,
-                investorType,
-                contentType,
-            },
+            updateOperations,
             { new: true, runValidators: true }
         );
 
@@ -60,6 +88,7 @@ exports.updateUserData = async (req, res) => {
         res.status(500).json({ message: 'Error updating UserData', error: err.message });
     }
 };
+
 
 // Delete UserData
 exports.deleteUserData = async (req, res) => {

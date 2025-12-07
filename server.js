@@ -7,11 +7,11 @@ const userDataRoutes = require('./routes/userDataRoutes');
 
 const app = express();
 
-// Middleware
+// Middlewares
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
+//  MongoDB
 mongoose
     .connect(process.env.DB_URI, {})
     .then(() => console.log('MongoDB connected'))
@@ -25,11 +25,9 @@ app.get('/health', (req, res) => {
 // UserData Routes
 app.use('/api', userDataRoutes);
 
-// Serve static frontend assets
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
-// Fallback to index.html for other GET requests (avoids path-to-regexp wildcard issues)
 app.use((req, res, next) => {
     if (req.method !== 'GET' || req.path.startsWith('/api') || req.path === '/health') {
         return next();
@@ -37,6 +35,5 @@ app.use((req, res, next) => {
     res.sendFile(path.join(staticDir, 'index.html'));
 });
 
-// Start the server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
