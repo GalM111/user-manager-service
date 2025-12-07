@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manager Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>User Manager Service</h1>
+            <p>Simple UI to interact with the User Manager API deployed on Render.</p>
+        </header>
+
+        <section class="card">
+            <h2>Create User</h2>
+            <form id="create-form">
+                <label>
+                    Name
+                    <input type="text" id="name" required>
+                </label>
+                <label>
+                    Email
+                    <input type="email" id="email" required>
+                </label>
+                <label>
+                    Assets (comma separated)
+                    <input type="text" id="assets" placeholder="Stocks,Bonds">
+                </label>
+                <label>
+                    Investor Type
+                    <input type="text" id="investorType" placeholder="retail">
+                </label>
+                <label>
+                    Content Types (comma separated)
+                    <input type="text" id="contentType" placeholder="video,podcast">
+                </label>
+                <button type="submit">Create</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Lookup By Email</h2>
+            <form id="lookup-form">
+                <label>
+                    Email
+                    <input type="email" id="lookup-email" required>
+                </label>
+                <button type="submit">Fetch</button>
+            </form>
+            <pre id="lookup-result" class="result"></pre>
+        </section>
+
+        <section class="card">
+            <div class="list-header">
+                <h2>All Users</h2>
+                <button id="refresh">Refresh</button>
+            </div>
+            <pre id="list-result" class="result"></pre>
+        </section>
+    </main>
+
+    <template id="message-template">
+        <div class="toast"></div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

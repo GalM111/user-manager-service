@@ -1,0 +1,129 @@
+:root {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background: #0b1120;
+    color: #f8fafc;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+    max-width: 960px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    margin-bottom: 0.25rem;
+}
+
+.card {
+    background: #111a2c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    gap: 0.25rem;
+}
+
+input {
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(19, 35, 61, 0.6);
+    color: #f8fafc;
+}
+
+button {
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    color: #0b1120;
+    background: linear-gradient(120deg, #22d3ee, #818cf8);
+    align-self: flex-start;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(33, 150, 243, 0.45);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.result {
+    background: rgba(9, 14, 28, 0.9);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: rgba(15, 118, 110, 0.95);
+    color: #ecfeff;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    animation: toast 3s ease forwards;
+}
+
+.toast.error {
+    background: rgba(220, 38, 38, 0.95);
+}
+
+@keyframes toast {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    85% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
